@@ -28,10 +28,8 @@
   top: 28px;
   width: 239px;
   height: 225px;
-  background: url('./assets/dots.svg') no-repeat;
+  background: url("./assets/dots.svg") no-repeat;
 }
-
-.frame--idle .dots { box-shadow: inset 0 0 0 1px #000000; }
 
 .glow {
   position: absolute;
@@ -39,7 +37,7 @@
 
   background: radial-gradient(
     closest-side,
-    rgba(0, 92, 255, 1.0) 0%,
+    rgba(0, 92, 255, 1) 0%,
     rgba(0, 83, 230, 0.9) 10%,
     rgba(0, 74, 204, 0.8) 20%,
     rgba(0, 64, 178, 0.7) 30%,
@@ -49,7 +47,7 @@
     rgba(0, 28, 77, 0.3) 70%,
     rgba(0, 18, 51, 0.2) 80%,
     rgba(0, 9, 25, 0.1) 90%,
-    rgba(0, 0, 0, 0.0) 100%
+    rgba(0, 0, 0, 0) 100%
   );
 }
 
@@ -59,8 +57,6 @@
   width: 888px;
   height: 888px;
 }
-
-.frame--idle .glow--right { border: 1px solid #000000; }
 
 .frame--success .glow--right {
   left: 954px;
@@ -83,7 +79,9 @@
   background: #000000;
 }
 
-.frame--idle .panel { box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); }
+.frame--idle .panel {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
 
 /* título Perfil GitHub */
 .title {
@@ -152,10 +150,14 @@
 }
 /* animação de rotação */
 @keyframes girar {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.frame--error .search { box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); }
+.frame--error .search {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
 
 .search__input {
   position: absolute;
@@ -267,8 +269,14 @@
 
 /* card do perfil e mensagem de erro aparecem subindo devagar */
 @keyframes aparecer {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .profile,
@@ -290,7 +298,10 @@
     padding: 72px 32px 48px;
   }
 
-  .dots { left: -60px; top: -20px; }
+  .dots {
+    left: -60px;
+    top: -20px;
+  }
 
   .glow--right,
   .frame--success .glow--right {
@@ -394,7 +405,9 @@
     height: 160px;
   }
 
-  .profile__bio { width: auto; }
+  .profile__bio {
+    width: auto;
+  }
 
   .error {
     width: 100%;
