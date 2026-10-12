@@ -2,6 +2,8 @@
 
 Aplicação em **React** que busca um usuário na API pública do GitHub e mostra foto, nome e bio.
 
+**Acesse:** https://paulogoulartn.github.io/desafio-02-perfil-github/
+
 ![Prévia](preview.jpg)
 
 ## Tecnologias
