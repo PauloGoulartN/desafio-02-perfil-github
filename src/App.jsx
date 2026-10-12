@@ -8,21 +8,22 @@ import githubMarkFlat from "./assets/gh-octocat-flat.png";
 import githubWordmark from "./assets/github-wordmark.png";
 import "./App.css";
 
-// o layout do Figma tem 1440 de largura, então aumento ou diminuo a tela pra caber na janela
+// o layout do Figma tem 1440x810, então aumento ou diminuo a tela pra caber na janela
 const FRAME_WIDTH = 1440;
+const FRAME_HEIGHT = 810;
 // no celular a tela ficaria muito pequena, então abaixo disso uso o layout do App.css (media query)
 const MOBILE_WIDTH = 768;
 
-function useWindowWidth() {
-  const [width, setWidth] = useState(window.innerWidth);
+function useWindowSize() {
+  const [size, setSize] = useState({ width: window.innerWidth, height: window.innerHeight });
 
   useEffect(() => {
-    const onResize = () => setWidth(window.innerWidth);
+    const onResize = () => setSize({ width: window.innerWidth, height: window.innerHeight });
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  return width;
+  return size;
 }
 
 // as 3 telas do Figma: 'idle' = inicial, 'success' = achou o perfil, 'error' = não achou
@@ -30,9 +31,13 @@ export default function App() {
   const [username, setUsername] = useState("");
   const [status, setStatus] = useState("idle");
   const [user, setUser] = useState(null);
-  const width = useWindowWidth();
+  const { width, height } = useWindowSize();
   const isMobile = width < MOBILE_WIDTH;
-  const scale = width / FRAME_WIDTH;
+  // usa o menor dos dois pra tela caber inteira, sem cortar embaixo nem dos lados
+  const scale = Math.min(width / FRAME_WIDTH, height / FRAME_HEIGHT);
+  // o espaço que sobra é dividido por 2 pra deixar a tela no meio
+  const x = (width - FRAME_WIDTH * scale) / 2;
+  const y = (height - FRAME_HEIGHT * scale) / 2;
   const [loading, setLoading] = useState(false);
 
   async function handleSearch() {
@@ -57,11 +62,11 @@ export default function App() {
   return (
     <div
       className="viewport"
-      style={isMobile ? undefined : { height: 810 * scale }}
+      style={isMobile ? undefined : { height }}
     >
       <main
         className={`frame frame--${status}`}
-        style={isMobile ? undefined : { transform: `scale(${scale})` }}
+        style={isMobile ? undefined : { transform: `translate(${x}px, ${y}px) scale(${scale})` }}
       >
         {/* fundo */}
         <span className="dots" aria-hidden="true" />
